@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Title</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Features</a>
+            <a class="nav-item nav-link" href="#">Pricing</a>
+            <a class="nav-item nav-link disabled" href="#">Disabled</a>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container">
+      <h1>City Weather You Like it or Not</h1>
+      <div class="form">
+        <form action="" method='POST'>
+          {{ form.hidden_tag() }}
+          <fieldset>
+            {{ form.city_name.label }}
+            {{ form.city_name(class='form-control') }}
+          </fieldset>
+          {{ form.submit(class='btn btn-outline-success') }}
+        </form>
+      </div>
+    </div>
+    {% if city_data %}
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">Weather for {{ city_data.city }}</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Current Temp: </b>{{ city_data.current|round|int }}&#8457;</li>
+          <li class="list-group-item"><b>High: </b>{{ city_data.hi|round|int }}&#8457;</li>
+          <li class="list-group-item"><b>Low: </b>{{ city_data.lo }}&#8457;</li>
+          <li class="list-group-item"><b>Feels Like: </b>{{ city_data.feels_like|round|int }}&#8457;</li>
+          <li class="list-group-item"><b>Description: </b>{{ city_data.description }}</li>
+          <li class="list-group-item"><b>Sunrise: </b>{{ city_data.sunrise.strftime("%I:%M %p") }}</li>
+          <li class="list-group-item"><b>Sunset: </b>{{ city_data.sunset.strftime("%I:%M %p") }}</li>
+        </ul>
+      </div>
+    {% endif %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script>
+</body>
+</html>
